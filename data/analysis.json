@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "callId": "b2d26866-2e50-41e4-9f13-3980436cc668",
+    "callType": "Installation",
+    "duration": "00:01",
+    "date": "2025-11-25",
+    "participants": [
+      "Technician (Speaker A)",
+      "Customer (Speaker B)"
+    ],
+    "analyzedAt": "2025-11-25T20:23:15.579Z"
+  },
+  "compliance": {
+    "introduction": {
+      "present": true,
+      "timestamp": "00:12",
+      "utteranceId": 1,
+      "transcript": "Hello.",
+      "quality": "poor",
+      "score": 40,
+      "commentary": "⚠️ Poor execution, needs improvement. The technician properly greeted the customer and introduced themselves."
+    },
+    "problemDiagnosis": {
+      "present": true,
+      "timestamp": "01:25",
+      "utteranceIds": [
+        14,
+        49,
+        91
+      ],
+      "transcript": "[Customer] Right. So when it comes to just what to expect here in the future, I would say month to two months. I think we'll start to see. Or even sooner we'll start to see the efficiency drop again. And we still have those mold issues. I did just want to show you some different equipment options.\n[Technician] I see. I see. For this. For your homework. For your homework. Because there was something. Okay, no problem.\n[Technician] Are defrosting. I had a heat pump before in another place. Never had a problem with it. Yeah, 20 years ago.",
+      "quality": "fair",
+      "questionCount": 0,
+      "score": 60,
+      "commentary": "⚠️ Fair execution with significant room for improvement. The technician asked 0 questions to understand the problem."
+    },
+    "solutionExplanation": {
+      "present": true,
+      "timestamp": "24:18",
+      "utteranceIds": [
+        93
+      ],
+      "transcript": "Yeah. Okay. Okay. And how long does it take to install the system?",
+      "quality": "poor",
+      "score": 40,
+      "commentary": "⚠️ Poor execution, needs improvement. The technician explained what work was done or will be done."
+    },
+    "upsellAttempts": {
+      "attempts": [
+        {
+          "timestamp": "25:16",
+          "utteranceId": 99,
+          "transcript": "And I guess. And then the other thing I noticed is that you also have financing?"
+        }
+      ],
+      "present": true,
+      "count": 1,
+      "score": 80,
+      "commentary": "✓ The technician made 1 upsell attempt(s). Good job identifying opportunities."
+    },
+    "maintenancePlanOffer": {
+      "present": false,
+      "quality": "missing",
+      "score": 0,
+      "commentary": "❌ Missing or not completed. Always offer maintenance plans to prevent future issues."
+    },
+    "closing": {
+      "present": false,
+      "quality": "missing",
+      "score": 0,
+      "commentary": "❌ Missing or not completed. Always thank the customer and end the call on a positive note."
+    }
+  },
+  "scores": {
+    "individual": {
+      "introduction": 40,
+      "problemDiagnosis": 60,
+      "solutionExplanation": 40,
+      "upsellAttempts": 80,
+      "maintenancePlanOffer": 0,
+      "closing": 0
+    },
+    "overall": 39
+  },
+  "salesInsights": [
+    {
+      "type": "opportunity_taken",
+      "timestamp": "25:16",
+      "category": "Upsell",
+      "description": "Technician made upsell attempt during the call",
+      "transcript": "And I guess. And then the other thing I noticed is that you also have financing?",
+      "recommendation": "Good job identifying opportunity for additional services"
+    },
+    {
+      "type": "opportunity_missed",
+      "timestamp": "N/A",
+      "category": "Maintenance Plan",
+      "description": "No maintenance plan offered",
+      "recommendation": "Always offer maintenance plans to prevent future issues and build recurring revenue"
+    }
+  ],
+  "summary": "Overall call quality: 39/100. This service call needs significant improvement in multiple areas. Call type identified as: Installation. Areas for improvement: introduction, maintenance plan offering."
+}
