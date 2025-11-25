@@ -150,14 +150,22 @@ Tone evaluation + Intent recognition = Nuanced Insights
 
 **Implementation:**
 
-| Stage | Weight | Evaluation Method | Score |
-|-------|--------|-------------------|-------|
-| **Introduction** | 15% | Greeting + Name + Company detection | 40/100 |
-| **Problem Diagnosis** | 25% | Question count + Empathy keywords | 65/100 |
-| **Solution Explanation** | 25% | Length + Clarity indicators | 50/100 |
-| **Upsell Attempts** | 10% | Recommendation detection | 80/100 |
-| **Maintenance Plan** | 10% | Plan mention + Benefits | 0/100 |
-| **Closing** | 15% | Thank you + Professional sign-off | 0/100 |
+| Stage | Weight | Evaluation Method | Score | Quality |
+|-------|--------|-------------------|-------|---------|
+| **Introduction** | 15% | Greeting + Name + Company detection | 40/100 | Poor |
+| **Problem Diagnosis** | 25% ⭐ | Question count + Empathy keywords | 60/100 | Fair |
+| **Solution Explanation** | 25% ⭐ | Length + Clarity indicators | 40/100 | Poor |
+| **Upsell Attempts** | 10% | Recommendation detection | 80/100 | Present |
+| **Maintenance Plan** | 10% | Plan mention + Benefits | 0/100 | Missing |
+| **Closing** | 15% | Thank you + Professional sign-off | 0/100 | Missing |
+
+**Weighted Overall Score:** 39/100
+
+```
+Calculation:
+(40×0.15) + (60×0.25) + (40×0.25) + (80×0.10) + (0×0.10) + (0×0.15)
+= 6 + 15 + 10 + 8 + 0 + 0 = 39
+```
 
 **Insights Provided:**
 - Missing elements clearly flagged
@@ -216,8 +224,9 @@ Tone evaluation + Intent recognition = Nuanced Insights
 **Visual Hierarchy:**
 - Executive summary with key metrics at top
 - Tab navigation for organized content
-- Color-coded scores (🔴 Poor, 🟡 Fair, 🟢 Good)
-- Progress bars and visual indicators
+- Color-coded scores (🔴 <70: Poor, 🟡 70-84: Fair, 🟢 85+: Good)
+- Progress bars showing individual stage performance
+- Timeline view showing call progression with timestamps
 
 **Ease of Navigation:**
 - 5 intuitive tabs with icons and descriptions
@@ -441,10 +450,12 @@ service-call-analyzer/
 
 ### 🔍 Detailed Insights
 
+- **Individual Stage Scores**: Raw performance scores for each compliance stage
+- **Weighted Overall Score**: Importance-adjusted final score
 - **Transcript Quotes**: See exact evidence for each finding
-- **Quality Ratings**: excellent/good/fair/poor/missing
+- **Quality Ratings**: excellent (100) / good (80) / fair (60) / poor (40) / missing (0)
 - **Recommendations**: Specific, actionable improvement suggestions
-- **Comparison View**: Understand methodology differences
+- **Comparison View**: Understand methodology differences between Rule-Based and AI
 
 ### ⚡ Production Ready
 
@@ -482,12 +493,14 @@ service-call-analyzer/
 
 ### Analysis Results (Real Call)
 
-| Metric | Rule-Based | AI-Enhanced | Agreement |
-|--------|-----------|-------------|-----------|
-| **Overall Score** | 39/100 | 83/100 | Both identify same issues |
-| **Call Type** | Installation | Installation | ✅ Match |
-| **Sales Insights** | 5 found | 5 found | ✅ Match |
-| **Processing Time** | <100ms | 10-20s | Fast + Detailed |
+| Metric | Rule-Based | AI-Enhanced | Notes |
+|--------|-----------|-------------|-------|
+| **Overall Score** | 39/100 | 83/100 | Different weighting philosophies |
+| **Individual Scores** | 40,60,40,80,0,0 | Similar patterns | Both identify same gaps |
+| **Call Type** | Installation | Installation | ✅ Perfect match |
+| **Sales Insights** | 5 found | 5 found | ✅ Perfect match |
+| **Missing Elements** | Maintenance, Closing | Same | ✅ Agreement |
+| **Processing Time** | <100ms | 10-20s | Rule: Fast, AI: Detailed |
 
 ### Code Quality
 
@@ -497,19 +510,64 @@ service-call-analyzer/
 - **Build Size**: 337KB JS, 22KB CSS
 - **Gzipped**: 100KB (fast load)
 
-### Why Scores Differ
+### Understanding the Scoring System
+
+#### **Individual vs Overall Scores**
+
+The application shows two types of scores:
+
+**Individual Stage Scores** (shown in Call Timeline):
+```
+Introduction:          40/100
+Problem Diagnosis:     60/100
+Solution Explanation:  40/100
+Upsell Attempts:       80/100
+Maintenance Plan:       0/100
+Closing:                0/100
+```
+
+**Weighted Overall Score**: 39/100
+
+#### **How Weighted Scoring Works**
+
+The overall score is NOT a simple average. Instead, it uses weighted importance:
+
+```javascript
+Weights:
+├─ Introduction:         15%
+├─ Problem Diagnosis:    25%  ⭐ Most important
+├─ Solution Explanation: 25%  ⭐ Most important
+├─ Upsell Attempts:      10%
+├─ Maintenance Plan:     10%
+└─ Closing:              15%
+
+Calculation:
+Overall = (40 × 15%) + (60 × 25%) + (40 × 25%) + (80 × 10%) + (0 × 10%) + (0 × 15%)
+        = 6 + 15 + 10 + 8 + 0 + 0
+        = 39/100
+```
+
+**Why This Design:**
+- Diagnosis & Solution are weighted 25% each (core of service call)
+- A great upsell (80) doesn't compensate for poor diagnosis
+- Missing elements appropriately impact the overall score
+- Reflects real-world importance of each stage
+
+#### **Why Rule-Based vs AI Scores Differ**
 
 **Rule-Based (39/100):** Strict keyword matching penalizes missing elements heavily
-- Missing company name in intro: -30 points
-- No maintenance plan offered: -10 points  
-- Weak closing: -15 points
+- Missing company name in intro: Immediate penalty
+- No maintenance plan offered: 0 points for that stage  
+- Weak closing: 0 points for that stage
+- Binary: Either has keyword or doesn't
 
 **AI-Enhanced (83/100):** Contextual understanding rewards good effort
 - Recognizes implicit communication
 - Credits professional tone and rapport
 - Values problem-solving approach
+- Understands intent even without exact keywords
 
-Both methods identify the same issues, just weighted differently!
+**Both methods identify the same issues** - the difference is in how they weigh context vs. strict compliance!
 
 ---
 
@@ -570,20 +628,10 @@ Both methods identify the same issues, just weighted differently!
    - Instant feedback to technicians
    - Supervisor alerts
 
----
 
-## 📞 Contact & Support
 
 **Developer:** Diana Tao  
 **Repository:** https://github.com/DianaTao/service-call-analyzer  
 **Live Demo:** https://web-app-psi-ashen.vercel.app/
 
----
 
-## 📄 License
-
-This project was created as a take-home assignment to demonstrate technical and analytical capabilities.
-
----
-
-**Built with ❤️ using React, TypeScript, and AI**
