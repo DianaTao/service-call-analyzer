@@ -70,7 +70,7 @@ export const AnalysisComparison: React.FC<AnalysisComparisonProps> = ({
               <span className="text-lg text-gray-500">/100</span>
             </div>
             <p className="text-xs text-gray-600 mt-1">
-              {(aiAnalysis.metadata as any).model || 'GPT-4 Turbo'} with contextual understanding
+              {'model' in aiAnalysis.metadata ? (aiAnalysis.metadata as { model: string }).model : 'GPT-4 Turbo'} with contextual understanding
             </p>
           </div>
 
@@ -159,13 +159,15 @@ export const AnalysisComparison: React.FC<AnalysisComparisonProps> = ({
                     <div>
                       <span className="font-semibold text-gray-700">Rule-Based: </span>
                       <span className="text-gray-600">
-                        {(ruleBasedAnalysis.compliance as any)[stage.key].quality}
+                        {ruleBasedAnalysis.compliance[stage.key as keyof typeof ruleBasedAnalysis.compliance] && 
+                         (ruleBasedAnalysis.compliance[stage.key as keyof typeof ruleBasedAnalysis.compliance] as { quality: string }).quality}
                       </span>
                     </div>
                     <div>
                       <span className="font-semibold text-gray-700">AI: </span>
                       <span className="text-gray-600">
-                        {(aiAnalysis.compliance as any)[stage.key].quality}
+                        {aiAnalysis.compliance[stage.key as keyof typeof aiAnalysis.compliance] && 
+                         (aiAnalysis.compliance[stage.key as keyof typeof aiAnalysis.compliance] as { quality: string }).quality}
                       </span>
                     </div>
                   </div>
