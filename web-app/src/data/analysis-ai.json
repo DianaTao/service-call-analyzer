@@ -8,9 +8,9 @@
       "Technician (Speaker A)",
       "Customer (Speaker B)"
     ],
-    "analyzedAt": "2025-11-25T20:57:54.834Z",
+    "analyzedAt": "2025-11-25T21:01:44.806Z",
     "analysisType": "AI-Enhanced Analysis",
-    "model": "GPT-4 Turbo (Mock)",
+    "model": "GPT-4 Turbo",
     "confidence": 0.92
   },
   "compliance": {
