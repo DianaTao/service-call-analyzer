@@ -159,15 +159,25 @@ export const AnalysisComparison: React.FC<AnalysisComparisonProps> = ({
                     <div>
                       <span className="font-semibold text-gray-700">Rule-Based: </span>
                       <span className="text-gray-600">
-                        {ruleBasedAnalysis.compliance[stage.key as keyof typeof ruleBasedAnalysis.compliance] && 
-                         (ruleBasedAnalysis.compliance[stage.key as keyof typeof ruleBasedAnalysis.compliance] as { quality: string }).quality}
+                        {(() => {
+                          const item = ruleBasedAnalysis.compliance[stage.key as keyof typeof ruleBasedAnalysis.compliance];
+                          if (stage.key === 'upsellAttempts') {
+                            return `${(item as any).count} attempt${(item as any).count !== 1 ? 's' : ''} detected`;
+                          }
+                          return item && (item as { quality: string }).quality;
+                        })()}
                       </span>
                     </div>
                     <div>
                       <span className="font-semibold text-gray-700">AI: </span>
                       <span className="text-gray-600">
-                        {aiAnalysis.compliance[stage.key as keyof typeof aiAnalysis.compliance] && 
-                         (aiAnalysis.compliance[stage.key as keyof typeof aiAnalysis.compliance] as { quality: string }).quality}
+                        {(() => {
+                          const item = aiAnalysis.compliance[stage.key as keyof typeof aiAnalysis.compliance];
+                          if (stage.key === 'upsellAttempts') {
+                            return `${(item as any).count} attempt${(item as any).count !== 1 ? 's' : ''} detected`;
+                          }
+                          return item && (item as { quality: string }).quality;
+                        })()}
                       </span>
                     </div>
                   </div>
