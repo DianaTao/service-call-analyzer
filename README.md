@@ -4,7 +4,7 @@ A web application for analyzing service call recordings, evaluating technician p
 
 ## 🌐 Live Demo
 
-[Add your deployed URL here after Vercel deployment]
+**Live Application:** https://web-b9hzy35oa-dianataos-projects.vercel.app
 
 ## 📋 Overview
 
