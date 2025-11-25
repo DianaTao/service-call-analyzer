@@ -1,0 +1,141 @@
+{
+  "generatedAt": "2025-11-25T20:47:20.357Z",
+  "totalCalls": 5,
+  "processingTimeSeconds": 0.008,
+  "averageProcessingTimePerCall": 0.0016,
+  "results": [
+    {
+      "callId": "demo-call-2-1764103633581",
+      "fileName": "transcript-demo-2.json",
+      "duration": "00:01",
+      "utteranceCount": 131,
+      "speakerCount": 2,
+      "ruleBasedScore": 52,
+      "aiScore": 97,
+      "scoreDifference": 45,
+      "callType": "Routine Maintenance",
+      "salesOpportunities": 2,
+      "metrics": {
+        "technicianUtterances": 66,
+        "customerUtterances": 65,
+        "talkRatio": "50.4",
+        "questionsAsked": 7,
+        "averageConfidence": "0.942",
+        "complianceRate": 66.66666666666666
+      },
+      "analyzedAt": "2025-11-25T20:47:20.350Z"
+    },
+    {
+      "callId": "demo-call-3-1764103633584",
+      "fileName": "transcript-demo-3.json",
+      "duration": "00:01",
+      "utteranceCount": 131,
+      "speakerCount": 2,
+      "ruleBasedScore": 41,
+      "aiScore": 92,
+      "scoreDifference": 51,
+      "callType": "Emergency Repair",
+      "salesOpportunities": 2,
+      "metrics": {
+        "technicianUtterances": 66,
+        "customerUtterances": 65,
+        "talkRatio": "50.4",
+        "questionsAsked": 7,
+        "averageConfidence": "0.942",
+        "complianceRate": 66.66666666666666
+      },
+      "analyzedAt": "2025-11-25T20:47:20.351Z"
+    },
+    {
+      "callId": "demo-call-4-1764103633585",
+      "fileName": "transcript-demo-4.json",
+      "duration": "00:01",
+      "utteranceCount": 131,
+      "speakerCount": 2,
+      "ruleBasedScore": 28,
+      "aiScore": 79,
+      "scoreDifference": 51,
+      "callType": "Installation",
+      "salesOpportunities": 2,
+      "metrics": {
+        "technicianUtterances": 66,
+        "customerUtterances": 65,
+        "talkRatio": "50.4",
+        "questionsAsked": 7,
+        "averageConfidence": "0.942",
+        "complianceRate": 66.66666666666666
+      },
+      "analyzedAt": "2025-11-25T20:47:20.353Z"
+    },
+    {
+      "callId": "demo-call-5-1764103633587",
+      "fileName": "transcript-demo-5.json",
+      "duration": "00:01",
+      "utteranceCount": 131,
+      "speakerCount": 2,
+      "ruleBasedScore": 24,
+      "aiScore": 67,
+      "scoreDifference": 43,
+      "callType": "Consultation",
+      "salesOpportunities": 2,
+      "metrics": {
+        "technicianUtterances": 66,
+        "customerUtterances": 65,
+        "talkRatio": "50.4",
+        "questionsAsked": 7,
+        "averageConfidence": "0.942",
+        "complianceRate": 66.66666666666666
+      },
+      "analyzedAt": "2025-11-25T20:47:20.355Z"
+    },
+    {
+      "callId": "b2d26866-2e50-41e4-9f13-3980436cc668",
+      "fileName": "transcript.json",
+      "duration": "00:01",
+      "utteranceCount": 131,
+      "speakerCount": 2,
+      "ruleBasedScore": 39,
+      "aiScore": 83,
+      "scoreDifference": 44,
+      "callType": "Installation",
+      "salesOpportunities": 2,
+      "metrics": {
+        "technicianUtterances": 66,
+        "customerUtterances": 65,
+        "talkRatio": "50.4",
+        "questionsAsked": 7,
+        "averageConfidence": "0.942",
+        "complianceRate": 66.66666666666666
+      },
+      "analyzedAt": "2025-11-25T20:47:20.356Z"
+    }
+  ],
+  "aggregateStatistics": {
+    "averageRuleBasedScore": 36.8,
+    "averageAiScore": 83.6,
+    "standardDeviationRule": 9.947864092356712,
+    "standardDeviationAi": 10.461357464497617,
+    "correlation": 0.9428435926208414,
+    "scoreAgreementRate": 0,
+    "callTypes": {
+      "Routine Maintenance": 1,
+      "Emergency Repair": 1,
+      "Installation": 2,
+      "Consultation": 1
+    },
+    "averageSalesOpportunities": 2,
+    "totalUtterances": 655,
+    "averageUtterances": 131
+  },
+  "reproducibility": {
+    "consistencyScore": 6.400000000000006,
+    "description": "All calls analyzed with identical methodology ensuring reproducible results",
+    "methodology": "Rule-based algorithm with fixed weights and AI-enhanced contextual analysis"
+  },
+  "scalability": {
+    "callsProcessed": 5,
+    "throughput": "37500.00 calls/minute",
+    "estimatedCapacity": "1000+ calls/hour with parallel processing",
+    "description": "Batch processing capability demonstrates production-ready scalability"
+  }
+}

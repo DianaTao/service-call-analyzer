@@ -7,6 +7,8 @@ import { PerformanceMetrics } from './components/PerformanceMetrics';
 import { ComplianceCard } from './components/ComplianceCard';
 import { SalesInsights } from './components/SalesInsights';
 import { TranscriptViewer } from './components/TranscriptViewer';
+import { AnalysisComparison } from './components/AnalysisComparison';
+import { BatchAnalysis } from './components/BatchAnalysis';
 import { Footer } from './components/Footer';
 import {
   FaHandshake,
@@ -21,19 +23,24 @@ import type { Analysis, Transcript } from './types';
 
 // Import data files
 import analysisData from './data/analysis.json';
+import aiAnalysisData from './data/analysis-ai.json';
 import transcriptData from './data/transcript.json';
+import batchData from './data/batch-analysis.json';
 
 const analysis = analysisData as Analysis;
+const aiAnalysis = aiAnalysisData as any; // AI analysis has extended fields
 const transcript = transcriptData as Transcript;
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'transcript' | 'compliance' | 'sales'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'transcript' | 'compliance' | 'sales' | 'comparison' | 'batch'>('overview');
 
   const tabs = [
     { id: 'overview' as const, label: 'Overview', icon: '📊', description: 'Key insights & metrics' },
+    { id: 'comparison' as const, label: 'AI vs Rule-Based', icon: '⚖️', description: 'Method comparison' },
     { id: 'compliance' as const, label: 'Compliance', icon: '✓', description: 'Detailed stage analysis' },
     { id: 'sales' as const, label: 'Sales', icon: '💰', description: 'Opportunities & insights' },
     { id: 'transcript' as const, label: 'Transcript', icon: '📝', description: 'Full conversation' },
+    { id: 'batch' as const, label: 'Scalability', icon: '🚀', description: 'Batch processing demo' },
   ];
 
   return (
@@ -60,8 +67,8 @@ function App() {
               </h2>
               <p className="text-gray-700 leading-relaxed mb-3">{analysis.summary}</p>
               <div className="flex flex-wrap gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-gray-700">Overall Score:</span>
+                <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg shadow-sm">
+                  <span className="font-semibold text-gray-700">Rule-Based:</span>
                   <span className={`text-2xl font-bold ${
                     analysis.scores.overall >= 85 ? 'text-green-600' :
                     analysis.scores.overall >= 70 ? 'text-yellow-600' : 'text-red-600'
@@ -69,11 +76,16 @@ function App() {
                     {analysis.scores.overall}/100
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-gray-700">Participants:</span>
-                  <span className="text-gray-600">{analysis.metadata.participants.length} speakers</span>
+                <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg shadow-sm">
+                  <span className="font-semibold text-gray-700">AI-Enhanced:</span>
+                  <span className={`text-2xl font-bold ${
+                    aiAnalysis.scores.overall >= 85 ? 'text-green-600' :
+                    aiAnalysis.scores.overall >= 70 ? 'text-yellow-600' : 'text-red-600'
+                  }`}>
+                    {aiAnalysis.scores.overall}/100
+                  </span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg shadow-sm">
                   <span className="font-semibold text-gray-700">Duration:</span>
                   <span className="text-gray-600">{analysis.metadata.duration}</span>
                 </div>
@@ -96,12 +108,12 @@ function App() {
 
         {/* Navigation Tabs */}
         <div className="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
-          <div className="flex border-b border-gray-200">
+          <div className="flex flex-wrap border-b border-gray-200">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex-1 px-6 py-4 font-medium transition-all ${
+                className={`flex-1 min-w-[150px] px-4 py-3 font-medium transition-all ${
                   activeTab === tab.id
                     ? 'text-blue-600 bg-blue-50 border-b-4 border-blue-600'
                     : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
@@ -109,7 +121,7 @@ function App() {
               >
                 <div className="flex flex-col items-center">
                   <span className="text-2xl mb-1">{tab.icon}</span>
-                  <span className="font-semibold">{tab.label}</span>
+                  <span className="font-semibold text-sm">{tab.label}</span>
                   <span className="text-xs text-gray-500 mt-1">{tab.description}</span>
                 </div>
               </button>
@@ -160,7 +172,7 @@ function App() {
                       })}
                     </ul>
                   </div>
-      <div>
+                  <div>
                     <h3 className="font-semibold text-gray-700 mb-3">Sales Overview</h3>
                     <ul className="space-y-2 text-sm">
                       {analysis.salesInsights.map((insight, idx) => (
@@ -175,7 +187,11 @@ function App() {
                   </div>
                 </div>
               </div>
-      </div>
+            </div>
+          )}
+
+          {activeTab === 'comparison' && (
+            <AnalysisComparison ruleBasedAnalysis={analysis} aiAnalysis={aiAnalysis} />
           )}
 
           {activeTab === 'compliance' && (
@@ -284,6 +300,10 @@ function App() {
                 </div>
               </div>
             </div>
+          )}
+
+          {activeTab === 'batch' && (
+            <BatchAnalysis batchData={batchData} />
           )}
         </div>
       </div>
