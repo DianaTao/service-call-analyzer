@@ -36,33 +36,60 @@ async function analyzeWithOpenAI() {
       .map(u => `[${u.startTime}] ${u.speakerLabel}: ${u.text}`)
       .join('\n');
 
-    const prompt = `Analyze this service call transcript and provide detailed insights.
+    const prompt = `Analyze this HVAC service call transcript using STRICT scoring criteria. Be critical and realistic in your assessment.
 
 TRANSCRIPT:
 ${fullConversation.substring(0, 8000)} // Limit for token size
 
-Please analyze the following aspects:
+SCORING GUIDELINES (be honest and critical):
+- 85-100 = Excellent (went above and beyond, perfect execution)
+- 65-84 = Good (solid performance, minor gaps)
+- 45-64 = Fair (basic requirements met, significant room for improvement)
+- 0-44 = Poor (missing key elements, needs major improvement)
 
-1. INTRODUCTION: Did the technician properly introduce themselves and the company?
-2. PROBLEM DIAGNOSIS: How well did the technician understand the customer's issue?
-3. SOLUTION EXPLANATION: How clearly was the solution explained?
-4. UPSELL ATTEMPTS: Were additional services suggested appropriately?
-5. MAINTENANCE PLAN: Was a maintenance plan offered?
-6. CLOSING: Was the call closed professionally?
+Analyze these 6 aspects:
 
-For each aspect, provide:
-- Score (0-100)
-- Quality rating (excellent/good/fair/poor/missing)
-- Specific observations
-- Recommendations
+1. INTRODUCTION (Weight: 15%)
+   - Must: Technician name + company name + greeting
+   - Score 80+ ONLY if ALL are present clearly
+   - Score below 50 if company name missing
 
-Also identify:
-- Call type (repair, installation, maintenance, etc.)
-- Key sales opportunities (taken or missed)
-- Customer sentiment
-- Overall professionalism level
+2. PROBLEM DIAGNOSIS (Weight: 25%)
+   - Count diagnostic questions asked (need 3+ for good score)
+   - Check for empathy words (sorry, understand, help)
+   - Active listening indicators (I see, got it)
+   - Score heavily on question count
 
-Format as JSON with structure matching the example.`;
+3. SOLUTION EXPLANATION (Weight: 25%)
+   - Length matters: >200 chars = better score
+   - Must use explanation words (because, reason, this will help)
+   - Should confirm understanding (make sense?, questions?)
+   - Score below 50 if explanation is brief
+
+4. UPSELL ATTEMPTS (Weight: 10%)
+   - Count specific product/service recommendations
+   - Each upsell = 40 points
+   - Must be explicit, not implied
+
+5. MAINTENANCE PLAN (Weight: 10%)
+   - Must explicitly mention: plan, membership, maintenance agreement
+   - Should mention pricing ($, cost, dollar)
+   - Should explain benefits (save, protect, prevent)
+   - Score 0 if not offered at all
+
+6. CLOSING (Weight: 15%)
+   - Must say "thank you" or similar
+   - Should confirm satisfaction
+   - Professional sign-off
+
+IMPORTANT: If something is MISSING entirely, score it 0-20. Don't be generous. Real calls often have gaps.
+
+Provide:
+- Realistic scores based on actual evidence in transcript
+- Call type (repair/installation/maintenance/consultation)
+- Sales opportunities (be specific with timestamps)
+
+Be CRITICAL and REALISTIC. Most real calls score 40-60/100, not 80+.`;
 
     console.log('📡 Calling OpenAI API...');
     

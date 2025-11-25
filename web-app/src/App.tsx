@@ -8,7 +8,6 @@ import { ComplianceCard } from './components/ComplianceCard';
 import { SalesInsights } from './components/SalesInsights';
 import { TranscriptViewer } from './components/TranscriptViewer';
 import { AnalysisComparison } from './components/AnalysisComparison';
-import { BatchAnalysis } from './components/BatchAnalysis';
 import { Footer } from './components/Footer';
 import {
   FaHandshake,
@@ -25,14 +24,13 @@ import type { Analysis, Transcript } from './types';
 import analysisData from './data/analysis.json';
 import aiAnalysisData from './data/analysis-ai.json';
 import transcriptData from './data/transcript.json';
-import batchData from './data/batch-analysis.json';
 
 const analysis = analysisData as Analysis;
 const aiAnalysis = aiAnalysisData as any; // AI analysis has extended fields
 const transcript = transcriptData as Transcript;
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'transcript' | 'compliance' | 'sales' | 'comparison' | 'batch'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'transcript' | 'compliance' | 'sales' | 'comparison'>('overview');
 
   const tabs = [
     { id: 'overview' as const, label: 'Overview', icon: '📊', description: 'Key insights & metrics' },
@@ -40,7 +38,6 @@ function App() {
     { id: 'compliance' as const, label: 'Compliance', icon: '✓', description: 'Detailed stage analysis' },
     { id: 'sales' as const, label: 'Sales', icon: '💰', description: 'Opportunities & insights' },
     { id: 'transcript' as const, label: 'Transcript', icon: '📝', description: 'Full conversation' },
-    { id: 'batch' as const, label: 'Scalability', icon: '🚀', description: 'Batch processing demo' },
   ];
 
   return (
@@ -172,7 +169,7 @@ function App() {
                       })}
                     </ul>
                   </div>
-                  <div>
+      <div>
                     <h3 className="font-semibold text-gray-700 mb-3">Sales Overview</h3>
                     <ul className="space-y-2 text-sm">
                       {analysis.salesInsights.map((insight, idx) => (
@@ -187,7 +184,7 @@ function App() {
                   </div>
                 </div>
               </div>
-            </div>
+      </div>
           )}
 
           {activeTab === 'comparison' && (
@@ -302,9 +299,6 @@ function App() {
             </div>
           )}
 
-          {activeTab === 'batch' && (
-            <BatchAnalysis batchData={batchData} />
-          )}
         </div>
       </div>
 

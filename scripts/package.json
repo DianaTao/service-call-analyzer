@@ -7,9 +7,7 @@
     "transcribe": "node transcribe.js",
     "analyze": "node analyze.js",
     "analyze-ai": "node analyze-ai.js",
-    "analyze-both": "node analyze.js && node analyze-ai.js",
-    "generate-demo": "node generate-demo-calls.js",
-    "analyze-batch": "node analyze-batch.js"
+    "analyze-both": "node analyze.js && node analyze-ai.js"
   },
   "dependencies": {
     "axios": "^1.6.0",
