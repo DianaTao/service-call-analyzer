@@ -4,7 +4,7 @@ A web application for analyzing service call recordings, evaluating technician p
 
 ## 🌐 Live Demo
 
-**Live Application:** https://web-l9gxvndh6-dianataos-projects.vercel.app
+**Live Application:** https://web-bfsrs1kz1-dianataos-projects.vercel.app
 
 ### New Features ✨
 - **AI vs Rule-Based Comparison**: Side-by-side analysis comparison
